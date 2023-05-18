@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "713052575693",
+    "project_id": "taste-e8d5a",
+    "storage_bucket": "taste-e8d5a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713052575693:android:a9d49dff18b2c8fbb6d684",
+        "android_client_info": {
+          "package_name": "com.example.admin_taste"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713052575693-aou1g82fb3gql2vo7cfcnmufsv372fdi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBBqSUnDB8nTH3M3zmph_-RTeHIG7IVgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713052575693-aou1g82fb3gql2vo7cfcnmufsv372fdi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

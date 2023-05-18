@@ -1,0 +1,195 @@
+import 'package:admin_taste/model/cart_model.dart';
+import 'package:admin_taste/provider/providers.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+class KitchenTile extends StatefulWidget {
+  const KitchenTile({
+    Key? key,
+    required this.documents,
+    required this.width,
+    required this.height,
+    this.index,
+  }) : super(key: key);
+
+  final List<DocumentSnapshot<Object?>> documents;
+  final double width;
+  final double height;
+  final dynamic index;
+
+  @override
+  State<KitchenTile> createState() => _KitchenTileState();
+}
+
+class _KitchenTileState extends State<KitchenTile> {
+  int quantity = 0;
+
+  void increment() {
+    quantity++;
+    setState(() {});
+  }
+
+  void decrement() {
+    if (quantity > 0) {
+      quantity--;
+      setState(() {});
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer3<CartProvider, AuthProvider, MenuProvider>(
+      builder: (context, cp, ap, mp, child) {
+        return Padding(
+          padding: EdgeInsets.only(left: 16, right: 16, top: 3, bottom: 10),
+          child: GestureDetector(
+            child: Container(
+              height: 100,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: const EdgeInsets.only(
+                left: 24,
+                right: 24,
+                top: 11,
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: 10),
+                    height: 70,
+                    width: 70,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      image: DecorationImage(
+                          image: NetworkImage(
+                            widget.documents[widget.index]['foodImage'],
+                          ),
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.documents[widget.index]['foodName'],
+                        style: GoogleFonts.ubuntu(
+                          textStyle: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 23,
+                            color: Color(0xff4A5661),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(right: 20),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            15,
+                          ),
+                          color: Colors.teal,
+                        ),
+                        height: 30,
+                        width: 60,
+                        child: Center(
+                          child: Text(
+                            '₦${widget.documents[widget.index]['price']}',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: widget.width * 0.05,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      decrement();
+
+                      var itemJson = widget.documents[widget.index].data()
+                          as Map<String, dynamic>;
+                      print(widget.documents[widget.index].data());
+
+                      CartItemModel tempItem = CartItemModel.fromMap(itemJson)
+                        ..quantity = quantity;
+
+                      if (quantity >= 1) {
+                        cp.addItemToCart(tempItem);
+                      } else {
+                        cp.removeItemFromCart(tempItem);
+                      }
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.black),
+                      child: Icon(
+                        Icons.remove,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    child: Text(quantity.toString()),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      increment();
+
+                      if (quantity >= 1) {
+                        var itemJson = widget.documents[widget.index].data()
+                            as Map<String, dynamic>;
+                        print(widget.documents[widget.index].data());
+
+                        CartItemModel tempItem = CartItemModel.fromMap(itemJson)
+                          ..quantity = quantity;
+
+                        cp.addItemToCart(tempItem);
+                      }
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.black),
+                      child: Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  //
+                  // AddBox(
+                  //     height: widget.height * 0.1, width: widget.width * 0.05),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
