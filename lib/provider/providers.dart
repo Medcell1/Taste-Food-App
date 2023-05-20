@@ -211,7 +211,7 @@ class CartProvider extends ChangeNotifier {
     } else {
       cartItems.add(cartItem);
     }
-
+    notifyListeners();
     print(cartItems);
     print(cartItems[0].quantity);
   }
@@ -219,5 +219,6 @@ class CartProvider extends ChangeNotifier {
   void removeItemFromCart(CartItemModel cartItem) {
     cartItems.removeWhere((element) => element.foodName == cartItem.foodName);
     print(cartItems);
+    notifyListeners();
   }
 }
