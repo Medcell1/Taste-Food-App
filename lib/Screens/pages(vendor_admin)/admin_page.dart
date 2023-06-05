@@ -1,14 +1,15 @@
-import 'package:admin_taste/Pages/profile_page.dart';
+import 'package:admin_taste/Screens/pages(vendor_admin)/profile_page.dart';
 import 'package:admin_taste/database/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import '../Reusables/big_admin_util_box.dart';
-import '../Reusables/small_util_box_admin.dart';
+import '../../Reusables/big_admin_util_box.dart';
+import '../../Reusables/small_util_box_admin.dart';
 import 'menu_page.dart';
 
 enum Choose {
@@ -28,6 +29,39 @@ class AdminPage extends StatefulWidget {
 }
 
 class _AdminPageState extends State<AdminPage> {
+  checkInternet() async {
+    // Simple check to see if we have internet
+    print("The statement 'this machine is connected to the Internet' is: ");
+    print(await InternetConnectionCheckerPlus().hasConnection);
+
+    print(
+        "Current status: ${await InternetConnectionCheckerPlus().connectionStatus}");
+    var listener =
+        InternetConnectionCheckerPlus().onStatusChange.listen((status) {
+      switch (status) {
+        case InternetConnectionStatus.connected:
+          print('Data connection is available.');
+          break;
+        case InternetConnectionStatus.disconnected:
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              duration: Duration(seconds: 10),
+              backgroundColor: Colors.red,
+              content: Text(
+                'No Internet Connection',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          );
+          break;
+      }
+    });
+    await Future.delayed(
+      Duration(seconds: 40),
+    );
+    await listener.cancel();
+  }
+
   Choose? selected;
   Database db = Database();
   final auth = FirebaseAuth.instance.currentUser;
@@ -42,6 +76,13 @@ class _AdminPageState extends State<AdminPage> {
     } catch (e) {
       print(e);
     }
+  }
+
+  @override
+  void initState() {
+    checkInternet();
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
@@ -74,7 +115,7 @@ class _AdminPageState extends State<AdminPage> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.035,
+                        height: MediaQuery.of(context).size.height * 0.06,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -150,7 +191,7 @@ class _AdminPageState extends State<AdminPage> {
                             'Food Categories.',
                             style: GoogleFonts.kanit(
                                 textStyle: TextStyle(
-                              fontSize: 30,
+                              fontSize: 25,
                             )),
                           ),
                         ),
@@ -162,6 +203,8 @@ class _AdminPageState extends State<AdminPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SmallUtilBox(
+                            height: height,
+                            width: width,
                             onTap: () {
                               selected = Choose.first;
                               setState(() {});
@@ -179,6 +222,8 @@ class _AdminPageState extends State<AdminPage> {
                             width: width * 0.02,
                           ),
                           SmallUtilBox(
+                            height: height,
+                            width: width,
                             onTap: () {
                               selected = Choose.second;
                               setState(() {});
@@ -196,6 +241,8 @@ class _AdminPageState extends State<AdminPage> {
                             width: width * 0.02,
                           ),
                           SmallUtilBox(
+                            height: height,
+                            width: width,
                             onTap: () {
                               selected = Choose.third;
                               setState(() {});
@@ -213,6 +260,8 @@ class _AdminPageState extends State<AdminPage> {
                             width: width * 0.02,
                           ),
                           SmallUtilBox(
+                            height: height,
+                            width: width,
                             onTap: () {
                               selected = Choose.fourth;
                               setState(() {});
@@ -232,11 +281,14 @@ class _AdminPageState extends State<AdminPage> {
                         height: 20,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
                             width: 20,
                           ),
                           BigUtilBox(
+                            height: height,
+                            width: width,
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -256,6 +308,8 @@ class _AdminPageState extends State<AdminPage> {
                             width: 20,
                           ),
                           BigUtilBox(
+                            height: height,
+                            width: width,
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -278,11 +332,14 @@ class _AdminPageState extends State<AdminPage> {
                         height: 25,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
                             width: 20,
                           ),
                           BigUtilBox(
+                            height: height,
+                            width: width,
                             text: 'Orders',
                             content: Icon(
                               Icons.shopping_cart_outlined,
@@ -293,6 +350,8 @@ class _AdminPageState extends State<AdminPage> {
                             width: 20,
                           ),
                           BigUtilBox(
+                            height: height,
+                            width: width,
                             text: 'Records',
                             content: Icon(
                               Icons.auto_graph,

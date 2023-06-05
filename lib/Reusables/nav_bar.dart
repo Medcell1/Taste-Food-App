@@ -1,11 +1,11 @@
-import 'package:admin_taste/Pages/FirstPage.dart';
-import 'package:admin_taste/Pages/who_are_you.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../Pages/cart_page.dart';
-import '../Pages/hello_vendor.dart';
+import '../Screens/cart_page.dart';
+import '../Screens/pages(customer)/FirstPage.dart';
+import '../Screens/pages(vendor_admin)/hello_vendor.dart';
+import '../Screens/who_are_you.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);

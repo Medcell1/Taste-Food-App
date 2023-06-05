@@ -1,11 +1,11 @@
 import 'package:admin_taste/Reusables/Reusablefield.dart';
-import 'package:admin_taste/drawer_screen.dart';
 import 'package:admin_taste/services/authentication_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../constants.dart';
-import '../provider/providers.dart';
+import '../../constants.dart';
+import '../../provider/providers.dart';
+import 'admin_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -106,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => DrawerScreen()),
+                      MaterialPageRoute(builder: (context) => AdminPage()),
                       (route) => false);
                   ScaffoldMessenger.of(context).removeCurrentSnackBar();
                 }

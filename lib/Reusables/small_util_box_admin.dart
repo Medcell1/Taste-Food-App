@@ -7,6 +7,8 @@ class SmallUtilBox extends StatelessWidget {
   final dynamic onTap;
   final dynamic containerColor;
   final dynamic textColor;
+  final dynamic height;
+  final dynamic width;
   const SmallUtilBox({
     Key? key,
     required this.assetUrl,
@@ -14,6 +16,8 @@ class SmallUtilBox extends StatelessWidget {
     this.onTap,
     this.containerColor,
     this.textColor,
+    this.height,
+    this.width,
   }) : super(key: key);
 
   @override
@@ -26,7 +30,7 @@ class SmallUtilBox extends StatelessWidget {
           border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(15),
         ),
-        width: 90,
+        width: width * 0.2,
         height: 115,
         child: Center(
           child: Column(

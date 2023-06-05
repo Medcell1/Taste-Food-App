@@ -1,8 +1,8 @@
-import 'package:admin_taste/Pages/SignUpPage.dart';
 import 'package:admin_taste/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'Login_Page.dart';
+import 'SignUpPage.dart';
 
 class HelloVendor extends StatelessWidget {
   const HelloVendor({Key? key}) : super(key: key);

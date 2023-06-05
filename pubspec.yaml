@@ -47,6 +47,10 @@ dependencies:
   loading_animation_widget: ^1.2.0+4
   animated_text_kit: ^4.2.2
   google_nav_bar: ^5.0.6
+  url_launcher: ^6.1.11
+  whatsapp: ^2.0.0
+  liquid_pull_to_refresh: ^3.0.1
+  internet_connection_checker_plus: ^1.0.1
 
 dev_dependencies:
   flutter_test:

@@ -1,14 +1,14 @@
 import 'dart:io';
 
-import 'package:admin_taste/drawer_screen.dart';
+import 'package:admin_taste/Screens/pages(vendor_admin)/Login_Page.dart';
+import 'package:admin_taste/Screens/pages(vendor_admin)/admin_page.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../Reusables/Reusablefield.dart';
-import '../constants.dart';
-import '../services/authentication_service.dart';
-import 'Login_Page.dart';
+import '../../Reusables/Reusablefield.dart';
+import '../../constants.dart';
+import '../../services/authentication_service.dart';
 
 XFile? file;
 
@@ -549,7 +549,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ));
                       Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (context) {
-                        return DrawerScreen();
+                        return AdminPage();
                       }), (route) => false);
                     } else {
                       setState(() {

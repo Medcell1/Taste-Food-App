@@ -5,8 +5,15 @@ class BigUtilBox extends StatelessWidget {
   final dynamic content;
   final String text;
   final dynamic onTap;
+  final dynamic height;
+  final dynamic width;
   const BigUtilBox(
-      {Key? key, required this.content, required this.text, this.onTap})
+      {Key? key,
+      required this.content,
+      required this.text,
+      this.onTap,
+      this.height,
+      this.width})
       : super(key: key);
 
   @override
@@ -25,8 +32,8 @@ class BigUtilBox extends StatelessWidget {
             ),
           ],
         ),
-        width: 180,
-        height: 180,
+        width: width * 0.4,
+        height: height * 0.22,
         child: Column(
           children: [
             Center(
@@ -47,7 +54,7 @@ class BigUtilBox extends StatelessWidget {
             Text(
               text,
               style: GoogleFonts.kanit(
-                fontSize: 25,
+                fontSize: 20,
               ),
             )
           ],

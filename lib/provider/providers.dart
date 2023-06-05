@@ -7,8 +7,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:whatsapp/whatsapp.dart';
 
-import '../Pages/who_are_you.dart';
+import '../Screens/who_are_you.dart';
 import '../model/menu_model.dart';
 
 class MenuProvider extends ChangeNotifier {
@@ -26,6 +28,7 @@ class MenuProvider extends ChangeNotifier {
 
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection("users");
+
   pickImage() async {
     ImagePicker imagePicker = ImagePicker();
     file = await imagePicker.pickImage(
@@ -52,7 +55,7 @@ class MenuProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  late User? userInfo;
+  User? userInfo;
 
   TextEditingController imageController = TextEditingController();
   TextEditingController editImageController = TextEditingController();
@@ -64,9 +67,8 @@ class MenuProvider extends ChangeNotifier {
 
   CollectionReference menuCollection =
       FirebaseFirestore.instance.collection('menu');
-
   Future<void> deleteMenu(String menuId) async {
-    await menuCollection.doc(menuId).delete();
+    menuCollection.doc(menuId).delete();
   }
 
   List<MenuModel> menuList = [];
@@ -157,18 +159,6 @@ class MenuProvider extends ChangeNotifier {
     foundMenu = results;
     notifyListeners();
   }
-
-  // Future<void> getVendorsItems(String vendorId) async {
-  //   QuerySnapshot<Map<String, dynamic>> snapshot =
-  //       await FirebaseFirestore.instance
-  //           .collection('menu')
-  //           .where(
-  //             'uid',
-  //             isEqualTo: vendorId,
-  //           )
-  //           .get();
-  //   return snapshot;
-  // }
 }
 
 class AuthProvider extends ChangeNotifier {
@@ -197,6 +187,10 @@ class AuthProvider extends ChangeNotifier {
 
 class CartProvider extends ChangeNotifier {
   List<CartItemModel> cartItems = [];
+  void clearData() {
+    cartItems.clear();
+    notifyListeners();
+  }
 
   void addItemToCart(CartItemModel cartItem) {
     bool itemExists = cartItems
@@ -220,5 +214,32 @@ class CartProvider extends ChangeNotifier {
     cartItems.removeWhere((element) => element.foodName == cartItem.foodName);
     print(cartItems);
     notifyListeners();
+  }
+}
+
+class WhatsAppProvider extends ChangeNotifier {
+  WhatsApp whatsApp = WhatsApp();
+
+  void openWhatsAppLink(String message, String number) async {
+    var whatsappUrl =
+        "https://wa.me/$number/?text=${Uri.encodeQueryComponent(message)}";
+
+    if (await canLaunchUrl(
+      Uri.parse(whatsappUrl),
+    )) {
+      await launchUrl(
+        Uri.parse(whatsappUrl),
+      );
+    } else {
+      throw 'Could not launch $whatsappUrl';
+    }
+  }
+
+  void openLink(String message, dynamic number) async {
+    await whatsApp.short(
+      to: int.parse(number),
+      message: message,
+      compress: true,
+    );
   }
 }

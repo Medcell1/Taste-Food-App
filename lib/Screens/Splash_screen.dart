@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:admin_taste/Pages/who_are_you.dart';
+import 'package:admin_taste/Screens/who_are_you.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,7 +15,7 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> {
   startTimeOut() {
-    return Timer(Duration(seconds: 7), navigate);
+    return Timer(Duration(seconds: 5), navigate);
   }
 
   void navigate() {
@@ -52,13 +52,13 @@ class _SplashState extends State<Splash> {
                       textStyle: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: 70,
+                        fontSize: 50,
                       ),
                     ),
                   ),
                 ],
               ),
-              LoadingAnimationWidget.dotsTriangle(color: Colors.black, size: 60)
+              LoadingAnimationWidget.dotsTriangle(color: Colors.black, size: 50)
             ],
           ),
         ],

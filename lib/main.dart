@@ -1,11 +1,11 @@
-import 'package:admin_taste/Pages/Splash_screen.dart';
 import 'package:admin_taste/provider/providers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'drawer_screen.dart';
+import 'Screens/Splash_screen.dart';
+import 'Screens/pages(vendor_admin)/admin_page.dart';
 
 void main() async {
   try {
@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MenuProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => WhatsAppProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
-                return DrawerScreen();
+                return AdminPage();
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }

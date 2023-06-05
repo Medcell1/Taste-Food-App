@@ -2,9 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'Pages/Hand_Of_God.dart';
-import 'Pages/Sans_Buka.dart';
-import 'Pages/cart_page.dart';
 import 'Reusables/Reusable_Text.dart';
 
 var fontStyle = GoogleFonts.notoSans();
@@ -213,9 +210,4 @@ List storeDetails = [
     two: 'Smoothies',
     three: '',
   ),
-];
-final List restaurantPages = [
-  HandOfGod(),
-  CartPage(),
-  Sans(),
 ];

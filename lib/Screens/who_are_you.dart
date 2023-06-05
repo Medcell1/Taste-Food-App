@@ -1,4 +1,4 @@
-import 'package:admin_taste/Pages/hello_vendor.dart';
+import 'package:admin_taste/Screens/pages(vendor_admin)/hello_vendor.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

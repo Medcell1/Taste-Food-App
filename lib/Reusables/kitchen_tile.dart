@@ -46,7 +46,7 @@ class _KitchenTileState extends State<KitchenTile> {
           padding: EdgeInsets.only(left: 16, right: 16, top: 3, bottom: 10),
           child: GestureDetector(
             child: Container(
-              height: 100,
+              height: 90,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
@@ -83,7 +83,7 @@ class _KitchenTileState extends State<KitchenTile> {
                         style: GoogleFonts.ubuntu(
                           textStyle: TextStyle(
                             fontWeight: FontWeight.w700,
-                            fontSize: 23,
+                            fontSize: 20,
                             color: Color(0xff4A5661),
                           ),
                         ),
@@ -106,15 +106,16 @@ class _KitchenTileState extends State<KitchenTile> {
                             '₦${widget.documents[widget.index]['price']}',
                             style: TextStyle(
                               color: Colors.white,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w400,
                             ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ),
                     ],
                   ),
                   SizedBox(
-                    width: widget.width * 0.05,
+                    width: widget.width * 0.03,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -126,7 +127,7 @@ class _KitchenTileState extends State<KitchenTile> {
 
                       CartItemModel tempItem = CartItemModel.fromMap(itemJson)
                         ..quantity = quantity;
-
+                      setState(() {});
                       if (quantity >= 1) {
                         cp.addItemToCart(tempItem);
                       } else {
@@ -134,14 +135,17 @@ class _KitchenTileState extends State<KitchenTile> {
                       }
                     },
                     child: Container(
-                      height: 40,
-                      width: 40,
+                      height: 30,
+                      width: 30,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.black),
-                      child: Icon(
-                        Icons.remove,
-                        color: Colors.white,
+                      child: Center(
+                        child: Icon(
+                          Icons.remove,
+                          color: Colors.white,
+                          size: 15,
+                        ),
                       ),
                     ),
                   ),
@@ -157,7 +161,6 @@ class _KitchenTileState extends State<KitchenTile> {
                   GestureDetector(
                     onTap: () {
                       increment();
-
                       if (quantity >= 1) {
                         var itemJson = widget.documents[widget.index].data()
                             as Map<String, dynamic>;
@@ -165,19 +168,20 @@ class _KitchenTileState extends State<KitchenTile> {
 
                         CartItemModel tempItem = CartItemModel.fromMap(itemJson)
                           ..quantity = quantity;
-
+                        setState(() {});
                         cp.addItemToCart(tempItem);
                       }
                     },
                     child: Container(
-                      height: 40,
-                      width: 40,
+                      height: 30,
+                      width: 30,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.black),
                       child: Icon(
                         Icons.add,
                         color: Colors.white,
+                        size: 15,
                       ),
                     ),
                   ),
