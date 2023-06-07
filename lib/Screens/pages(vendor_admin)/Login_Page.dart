@@ -15,9 +15,24 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  ScaffoldMessengerState? snackBar;
   String email = '';
   String password = '';
   bool isLoading = false;
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    snackBar = ScaffoldMessenger.of(context);
+  }
+
+  @override
+  void dispose() {
+    snackBar?.removeCurrentSnackBar();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,12 +113,11 @@ class _LoginPageState extends State<LoginPage> {
                 await Provider.of<MenuProvider>(context, listen: false)
                     .getUserInfo();
                 if (res == 'Successful') {
-                  ScaffoldMessenger.of(context).showSnackBar(
+                  snackBar!.showSnackBar(
                     SnackBar(
                       content: Text('Login Successful'),
                     ),
                   );
-
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => AdminPage()),

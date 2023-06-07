@@ -88,52 +88,50 @@ class VendorMenuScreen extends StatelessWidget {
       },
       child: Scaffold(
         backgroundColor: Colors.black,
-        body: SingleChildScrollView(
-          child: StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection('menu')
-                .where(
-                  'uid',
-                  isEqualTo: vendorId,
-                )
-                .snapshots(),
-            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (!snapshot.hasData) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: height * 0.9,
-                      child: Center(
-                        child: LoadingAnimationWidget.dotsTriangle(
-                          size: 50,
-                          color: Colors.white,
-                        ),
+        body: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('menu')
+              .where(
+                'uid',
+                isEqualTo: vendorId,
+              )
+              .snapshots(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (!snapshot.hasData) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: height * 0.9,
+                    child: Center(
+                      child: LoadingAnimationWidget.dotsTriangle(
+                        size: 50,
+                        color: Colors.white,
                       ),
                     ),
-                  ],
-                );
-              } else if (snapshot.connectionState == ConnectionState.waiting) {
-                return SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: height * 0.9,
-                        child: Center(
-                          child: LoadingAnimationWidget.dotsTriangle(
-                            size: 50,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
-                );
-              }
-              List<DocumentSnapshot> documents = snapshot.data!.docs;
-
+                ],
+              );
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
               return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: height * 0.9,
+                    child: Center(
+                      child: LoadingAnimationWidget.dotsTriangle(
+                        size: 50,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }
+            List<DocumentSnapshot> documents = snapshot.data!.docs;
+
+            return SingleChildScrollView(
+              child: Column(
                 children: [
                   Column(
                     children: [
@@ -377,13 +375,10 @@ class VendorMenuScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 90,
-                  ),
                 ],
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
         floatingActionButton: Consumer<CartProvider>(
           builder: (context, cartProvider, _) {

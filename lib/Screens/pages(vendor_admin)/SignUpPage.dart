@@ -20,10 +20,19 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  ScaffoldMessengerState? snackBar;
   @override
   void dispose() {
+    snackBar?.removeCurrentSnackBar();
     // TODO: implement dispose
     super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    snackBar = ScaffoldMessenger.of(context);
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -543,10 +552,11 @@ class _SignUpPageState extends State<SignUpPage> {
                       }
                       await auth.signUpUser(
                           name, email, password, number, imageUrl, context);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        animation: null,
-                        content: Text('Registration Successful'),
-                      ));
+                      snackBar!.showSnackBar(
+                        SnackBar(
+                          content: Text('Registration Successful'),
+                        ),
+                      );
                       Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (context) {
                         return AdminPage();

@@ -123,6 +123,33 @@ class _MenuSearchPageState extends State<MenuSearchPage> {
                                 });
                           },
                           onLongTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: const Text(
+                                        'Are you sure you want to delete?'),
+                                    actionsAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () async {
+                                          await snapshot
+                                              .data!.docs[index].reference
+                                              .delete();
+                                          Navigator.pop(context, true);
+                                        },
+                                        child: const Text('Yes'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context, false);
+                                        },
+                                        child: const Text('No'),
+                                      ),
+                                    ],
+                                  );
+                                });
                             // mp.deleteMenu(
                             //   snapshot.data!.docs[index].id,
                             // );

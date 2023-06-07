@@ -10,6 +10,8 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import 'kitchen_seearch_page.dart';
+
 int _selectedItemPosition = 0;
 
 class FirstPage extends StatefulWidget {
@@ -103,17 +105,29 @@ class _FirstPageState extends State<FirstPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        margin: EdgeInsets.only(left: width * 0.05),
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(width: 2, color: Colors.grey),
-                        ),
-                        child: Icon(
-                          CupertinoIcons.search,
-                          size: 20,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return KitchenSearchPage();
+                              },
+                            ),
+                          );
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(left: width * 0.05),
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(width: 2, color: Colors.grey),
+                          ),
+                          child: Icon(
+                            CupertinoIcons.search,
+                            size: 20,
+                          ),
                         ),
                       ),
                       SizedBox(
