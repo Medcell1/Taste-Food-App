@@ -285,6 +285,9 @@ class _FirstPageState extends State<FirstPage> {
                                       ),
                                     );
                                   }
+                                  print(
+                                    documents[index]['phone_number'],
+                                  );
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.all(10),

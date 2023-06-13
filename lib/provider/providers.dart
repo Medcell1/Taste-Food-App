@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp/whatsapp.dart';
 
@@ -186,6 +187,20 @@ class AuthProvider extends ChangeNotifier {
 }
 
 class CartProvider extends ChangeNotifier {
+  int quantity = 0;
+
+  void increment() {
+    quantity++;
+    notifyListeners();
+  }
+
+  void decrement() {
+    if (quantity > 0) {
+      quantity--;
+      notifyListeners();
+    }
+  }
+
   List<CartItemModel> cartItems = [];
   void clearData() {
     cartItems.clear();
@@ -222,13 +237,15 @@ class WhatsAppProvider extends ChangeNotifier {
 
   void openWhatsAppLink(String message, String number) async {
     var whatsappUrl =
-        "https://wa.me/$number/?text=${Uri.encodeQueryComponent(message)}";
+        "https://api.whatsapp.com/send/?phone=$number&text=${Uri.encodeComponent(message)}";
+    // var whatsappUrl = "https://t.me/$number";
 
     if (await canLaunchUrl(
       Uri.parse(whatsappUrl),
     )) {
       await launchUrl(
         Uri.parse(whatsappUrl),
+        mode: LaunchMode.externalNonBrowserApplication,
       );
     } else {
       throw 'Could not launch $whatsappUrl';
@@ -241,5 +258,34 @@ class WhatsAppProvider extends ChangeNotifier {
       message: message,
       compress: true,
     );
+  }
+}
+
+class QuantityState extends ChangeNotifier {
+  int _quantity = 0;
+
+  int get quantity => _quantity;
+
+  void increment() {
+    _quantity++;
+    notifyListeners();
+  }
+
+  void decrement() {
+    if (_quantity > 0) {
+      _quantity--;
+      notifyListeners();
+    }
+  }
+
+  Future<void> loadQuantity() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _quantity = prefs.getInt('quantity') ?? 0;
+    notifyListeners();
+  }
+
+  Future<void> saveQuantity() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('quantity', _quantity);
   }
 }

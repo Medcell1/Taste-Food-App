@@ -28,20 +28,16 @@ dependencies:
   image_picker: ^0.8.5+2
   google_fonts: ^4.0.3
   modal_progress_hud_nsn: ^0.3.0
-  card_swiper: ^2.0.4
   firebase_core:
   firebase_core_platform_interface:
   firebase_auth:
   shared_preferences:
   cloud_firestore:
   firebase_storage:
-  flutter_zoom_drawer: ^3.0.3
   provider: ^6.0.5
   date_format: ^2.0.7
   cool_alert: ^1.1.0
   quickalert: ^1.0.1
-  shimmer: ^2.0.0
-  flutter_snake_navigationbar: ^0.6.1
   delayed_display: ^2.0.0
   flutter_staggered_animations: ^1.1.1
   loading_animation_widget: ^1.2.0+4
@@ -51,6 +47,7 @@ dependencies:
   whatsapp: ^2.0.0
   liquid_pull_to_refresh: ^3.0.1
   internet_connection_checker_plus: ^1.0.1
+  webview_flutter: ^2.0.13
 
 dev_dependencies:
   flutter_test:

@@ -36,13 +36,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  card_swiper:
-    dependency: "direct main"
-    description:
-      name: card_swiper
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.4"
   characters:
     dependency: transitive
     description:
@@ -244,13 +237,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.15"
-  flutter_snake_navigationbar:
-    dependency: "direct main"
-    description:
-      name: flutter_snake_navigationbar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.6.1"
   flutter_staggered_animations:
     dependency: "direct main"
     description:
@@ -268,13 +254,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_zoom_drawer:
-    dependency: "direct main"
-    description:
-      name: flutter_zoom_drawer
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.4+1"
   google_fonts:
     dependency: "direct main"
     description:
@@ -555,13 +534,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.0"
-  shimmer:
-    dependency: "direct main"
-    description:
-      name: shimmer
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -679,6 +651,34 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
+  webview_flutter:
+    dependency: "direct main"
+    description:
+      name: webview_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.8.0"
+  webview_flutter_android:
+    dependency: transitive
+    description:
+      name: webview_flutter_android
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.10.4"
+  webview_flutter_platform_interface:
+    dependency: transitive
+    description:
+      name: webview_flutter_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.9.5"
+  webview_flutter_wkwebview:
+    dependency: transitive
+    description:
+      name: webview_flutter_wkwebview
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.9.5"
   whatsapp:
     dependency: "direct main"
     description:

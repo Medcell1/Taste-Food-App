@@ -13,7 +13,7 @@ import 'confirmation_page.dart';
 
 int quantity = 0;
 
-class VendorMenuScreen extends StatelessWidget {
+class VendorMenuScreen extends StatefulWidget {
   final String vendorId;
   final String vendorName;
   final dynamic vendorNumber;
@@ -25,6 +25,11 @@ class VendorMenuScreen extends StatelessWidget {
       this.vendorNumber})
       : super(key: key);
 
+  @override
+  State<VendorMenuScreen> createState() => _VendorMenuScreenState();
+}
+
+class _VendorMenuScreenState extends State<VendorMenuScreen> {
   @override
   Widget build(BuildContext context) {
     Future<bool> onTap() async {
@@ -93,7 +98,7 @@ class VendorMenuScreen extends StatelessWidget {
               .collection('menu')
               .where(
                 'uid',
-                isEqualTo: vendorId,
+                isEqualTo: widget.vendorId,
               )
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -224,7 +229,7 @@ class VendorMenuScreen extends StatelessWidget {
                               child: Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
-                                  "$vendorName's Kitchen",
+                                  "${widget.vendorName}'s Kitchen",
                                   style: GoogleFonts.ubuntu(
                                     textStyle: TextStyle(
                                         fontSize: 20,
@@ -392,20 +397,19 @@ class VendorMenuScreen extends StatelessWidget {
             print("$totalPrice-------->>price!!");
             return PriceButton(
                 label: "$totalPrice",
-                onPressed: () {
+                onPressed: () async {
                   if (totalPrice != 0.0) {
-                    Navigator.push(
+                    await Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
                           return ConfirmationPage(
-                            number: vendorNumber,
+                            number: widget.vendorNumber,
                             total: totalPrice,
                           );
                         },
                       ),
                     );
-                    totalPrice = 0.0;
                   }
                 });
           },

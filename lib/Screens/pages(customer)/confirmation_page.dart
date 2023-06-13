@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../provider/providers.dart';
 
-class ConfirmationPage extends StatelessWidget {
+class ConfirmationPage extends StatefulWidget {
   final dynamic number;
   final dynamic total;
   const ConfirmationPage({
@@ -13,6 +13,11 @@ class ConfirmationPage extends StatelessWidget {
     this.total,
   }) : super(key: key);
 
+  @override
+  State<ConfirmationPage> createState() => _ConfirmationPageState();
+}
+
+class _ConfirmationPageState extends State<ConfirmationPage> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -48,13 +53,13 @@ class ConfirmationPage extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () {
+          onTap: () async {
             var message = '';
             for (var item in cp.cartItems) {
               message +=
                   '${item.foodName.toString()}: ${item.quantity.toString()}\n';
             }
-            wp.openWhatsAppLink(message, number);
+            wp.openWhatsAppLink(message, widget.number);
             print(message);
           },
           child: Container(
@@ -63,7 +68,7 @@ class ConfirmationPage extends StatelessWidget {
             height: 70,
             child: Center(
               child: Text(
-                'Proceed → $total',
+                'Proceed → ${widget.total}',
                 style: TextStyle(color: Colors.white),
               ),
             ),

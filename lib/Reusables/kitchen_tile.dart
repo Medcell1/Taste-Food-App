@@ -1,3 +1,4 @@
+import 'package:admin_taste/helper/helper.dart';
 import 'package:admin_taste/model/cart_model.dart';
 import 'package:admin_taste/provider/providers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,18 +25,40 @@ class KitchenTile extends StatefulWidget {
 }
 
 class _KitchenTileState extends State<KitchenTile> {
+  Future<void> saveQuantity(int quantity) async {
+    await HelperFunction.saveQuantity(quantity);
+  }
+
+  Future<void> _loadQuantity() async {
+    int quantity = await HelperFunction.getQuantity();
+    setState(() {
+      quantity = quantity;
+    });
+  }
+
   int quantity = 0;
 
   void increment() {
-    quantity++;
-    setState(() {});
+    setState(() {
+      quantity++;
+      saveQuantity(quantity);
+    });
   }
 
   void decrement() {
     if (quantity > 0) {
-      quantity--;
-      setState(() {});
+      setState(() {
+        quantity--;
+        saveQuantity(quantity);
+      });
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadQuantity();
   }
 
   @override
