@@ -22,13 +22,6 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   ScaffoldMessengerState? snackBar;
   @override
-  void dispose() {
-    snackBar?.removeCurrentSnackBar();
-    // TODO: implement dispose
-    super.dispose();
-  }
-
-  @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
@@ -214,6 +207,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 20,
                 ),
                 ReusableField(
+                  obscureText: false,
                   onSaved: (value) {
                     name = value;
                   },
@@ -231,6 +225,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 10,
                 ),
                 ReusableField(
+                  obscureText: false,
                   onSaved: (value) {
                     email = value;
                   },
@@ -249,6 +244,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 10,
                 ),
                 ReusableField(
+                  obscureText: false,
                   validator: (value) {
                     if (value == null) {
                       return 'Enter a Phone Number';

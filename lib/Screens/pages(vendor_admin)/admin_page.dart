@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import '../../Reusables/big_admin_util_box.dart';
+import '../../Reusables/AdminUtils/big_admin_util_box.dart';
 import '../../Reusables/small_util_box_admin.dart';
 import 'menu_page.dart';
 

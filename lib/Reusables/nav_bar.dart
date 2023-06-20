@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../Screens/cart_page.dart';
 import '../Screens/pages(customer)/FirstPage.dart';
-import '../Screens/pages(vendor_admin)/hello_vendor.dart';
-import '../Screens/who_are_you.dart';
+import '../Screens/pages(customer)/message_page.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
@@ -18,9 +16,7 @@ class _NavBarState extends State<NavBar> {
   var currentIndex = 0;
   final List<Widget> _pages = [
     FirstPage(),
-    UserProfilePage(),
-    HelloVendor(),
-    CartPage(),
+    MessagePage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -29,8 +25,8 @@ class _NavBarState extends State<NavBar> {
       extendBody: true,
       body: _pages[currentIndex],
       bottomNavigationBar: Container(
-        margin: EdgeInsets.all(width * .05),
-        height: width * .185,
+        margin: EdgeInsets.all(width * .09),
+        height: width * .175,
         decoration: BoxDecoration(
           color: Colors.black,
           boxShadow: [
@@ -44,8 +40,8 @@ class _NavBarState extends State<NavBar> {
         ),
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: 4,
-          padding: EdgeInsets.symmetric(horizontal: width * .02),
+          itemCount: 2,
+          padding: EdgeInsets.symmetric(horizontal: width * .15),
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
@@ -99,7 +95,7 @@ class _NavBarState extends State<NavBar> {
                                     ? '${listOfStrings[index]}'
                                     : '',
                                 style: TextStyle(
-                                    color: Colors.blueAccent,
+                                    color: Colors.green,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600),
                               ),
@@ -137,13 +133,9 @@ class _NavBarState extends State<NavBar> {
 
 List<String> listOfStrings = [
   'Home',
-  'Home',
-  'Home',
-  'Home',
+  'Mail',
 ];
 List<IconData> listofIcons = [
   Icons.home,
   Icons.markunread_rounded,
-  Icons.menu,
-  Icons.notifications,
 ];

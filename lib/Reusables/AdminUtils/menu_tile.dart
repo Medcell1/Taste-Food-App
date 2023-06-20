@@ -32,15 +32,26 @@ class MenuTile extends StatelessWidget {
             child: Container(
               height: 100,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.white,
-                    Color(0xff539E83).withOpacity(0.7),
-                  ],
-                  stops: [0.2, 1],
-                  begin: Alignment.bottomLeft,
-                  end: Alignment.topRight,
-                ),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(9),
+                // gradient: LinearGradient(
+                //   colors: [
+                //     Colors.green,
+                //     Colors.white,
+                //   ],
+                //   stops: [0.2, 4],
+                //   begin: Alignment.topLeft,
+                //   end: Alignment.bottomRight,
+                // ),
+                // gradient: LinearGradient(
+                //   colors: [
+                //     Colors.white,
+                //     Color(0xff539E83).withOpacity(0.7),
+                //   ],
+                //   stops: [0.2, 1],
+                //   begin: Alignment.bottomLeft,
+                //   end: Alignment.topRight,
+                // ),
               ),
               padding: const EdgeInsets.only(
                 left: 24,
@@ -79,12 +90,22 @@ class MenuTile extends StatelessWidget {
                       SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        '#$two',
-                        style: GoogleFonts.aclonica(
-                          textStyle: TextStyle(
-                            fontSize: 16,
-                            color: Color(0xff46535E),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.teal,
+                            borderRadius: BorderRadius.circular(15)),
+                        height: 32,
+                        width: 65,
+                        child: Center(
+                          child: Text(
+                            '#$two',
+                            style: GoogleFonts.aclonica(
+                              textStyle: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ),

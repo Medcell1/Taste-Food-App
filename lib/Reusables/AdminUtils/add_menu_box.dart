@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
-import '../Screens/pages(vendor_admin)/menu_page.dart';
-import '../provider/providers.dart';
+import '../../Screens/pages(vendor_admin)/menu_page.dart';
+import '../../provider/providers.dart';
 import 'menu_field.dart';
 
 class AddMenuBox extends StatefulWidget {
@@ -18,8 +18,6 @@ class AddMenuBox extends StatefulWidget {
 
 class _AddMenuBoxState extends State<AddMenuBox> {
   bool isLoading = false;
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     MenuProvider mp = Provider.of<MenuProvider>(context, listen: false);

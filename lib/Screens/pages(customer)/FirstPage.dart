@@ -12,8 +12,6 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'kitchen_seearch_page.dart';
 
-int _selectedItemPosition = 0;
-
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
 
@@ -60,7 +58,6 @@ class _FirstPageState extends State<FirstPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     checkInternet();
   }
@@ -78,8 +75,9 @@ class _FirstPageState extends State<FirstPage> {
 
     return Scaffold(
       body: LiquidPullToRefresh(
+        backgroundColor: Colors.black,
         showChildOpacityTransition: false,
-        color: Colors.black,
+        color: Colors.white,
         onRefresh: handleRefresh,
         child: SingleChildScrollView(
           child: StreamBuilder<QuerySnapshot>(
@@ -308,6 +306,14 @@ class _FirstPageState extends State<FirstPage> {
                                       padding: EdgeInsets.all(0),
                                       child: Container(
                                         decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                            colors: [
+                                              Colors.transparent,
+                                              Colors.black.withOpacity(0.7),
+                                            ],
+                                          ),
                                           shape: BoxShape.rectangle,
                                           borderRadius: BorderRadius.all(
                                             Radius.circular(
@@ -344,6 +350,9 @@ class _FirstPageState extends State<FirstPage> {
                         );
                       },
                     ),
+                  ),
+                  SizedBox(
+                    height: 100,
                   ),
                 ],
               );

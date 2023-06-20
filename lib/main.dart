@@ -1,6 +1,8 @@
+import 'package:admin_taste/constants.dart';
 import 'package:admin_taste/provider/providers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +13,17 @@ void main() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
 
-    await Firebase.initializeApp();
+    if (kIsWeb) {
+      await Firebase.initializeApp(
+        options: FirebaseOptions(
+            apiKey: Constant.apikey,
+            appId: Constant.appId,
+            messagingSenderId: Constant.messageSenderId,
+            projectId: Constant.projectId),
+      );
+    } else {
+      await Firebase.initializeApp();
+    }
   } catch (e) {
     print('this======> $e');
   }

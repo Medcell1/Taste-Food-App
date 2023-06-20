@@ -93,7 +93,7 @@ class _ConfirmTileState extends State<ConfirmTile> {
                         width: 100,
                         child: Center(
                           child: Text(
-                            'Quantity:${widget.quantity}',
+                            'Quantity: ${widget.quantity}',
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w400,
@@ -106,7 +106,10 @@ class _ConfirmTileState extends State<ConfirmTile> {
                   SizedBox(
                     width: widget.width * 0.05,
                   ),
-                  Text(totalOfEach.toString())
+                  Text(
+                    '₦${totalOfEach.toString()}',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  )
                 ],
               ),
             ),

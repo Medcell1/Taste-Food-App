@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
-import '../Screens/pages(vendor_admin)/menu_page.dart';
-import '../provider/providers.dart';
+import '../../Screens/pages(vendor_admin)/menu_page.dart';
+import '../../provider/providers.dart';
 import 'menu_field.dart';
 
 class EditMenuBox extends StatefulWidget {

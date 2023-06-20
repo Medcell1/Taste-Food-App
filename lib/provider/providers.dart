@@ -187,20 +187,6 @@ class AuthProvider extends ChangeNotifier {
 }
 
 class CartProvider extends ChangeNotifier {
-  int quantity = 0;
-
-  void increment() {
-    quantity++;
-    notifyListeners();
-  }
-
-  void decrement() {
-    if (quantity > 0) {
-      quantity--;
-      notifyListeners();
-    }
-  }
-
   List<CartItemModel> cartItems = [];
   void clearData() {
     cartItems.clear();
@@ -238,7 +224,6 @@ class WhatsAppProvider extends ChangeNotifier {
   void openWhatsAppLink(String message, String number) async {
     var whatsappUrl =
         "https://api.whatsapp.com/send/?phone=$number&text=${Uri.encodeComponent(message)}";
-    // var whatsappUrl = "https://t.me/$number";
 
     if (await canLaunchUrl(
       Uri.parse(whatsappUrl),

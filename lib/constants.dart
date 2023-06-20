@@ -2,6 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+class Constant {
+  static String apikey = 'AIzaSyBBxdGE1IuoRPIhsi6QwCaOiGqGDJlQFvE';
+  static String appId = "1:713052575693:web:135c689fcd0b7aa0b6d684";
+  static String messageSenderId = "713052575693";
+  static String projectId = "taste-e8d5a";
+}
+
 var fontStyle = GoogleFonts.notoSans();
 
 const kLogpagetop = TextStyle(

@@ -5,8 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
-import '../../Reusables/floating_price_button.dart';
-import '../../Reusables/kitchen_tile.dart';
+import '../../Reusables/VendorUtils/floating_price_button.dart';
+import '../../Reusables/VendorUtils/kitchen_tile.dart';
 import '../../model/cart_model.dart';
 import '../../provider/providers.dart';
 import 'confirmation_page.dart';
@@ -43,6 +43,8 @@ class _VendorMenuScreenState extends State<VendorMenuScreen> {
               TextButton(
                 onPressed: () {
                   Navigator.pop(context, true);
+
+                  ///dont forget to clear data
                   Provider.of<CartProvider>(context, listen: false).clearData();
                 },
                 child: const Text('Yes'),
@@ -135,48 +137,25 @@ class _VendorMenuScreenState extends State<VendorMenuScreen> {
             }
             List<DocumentSnapshot> documents = snapshot.data!.docs;
 
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  Column(
-                    children: [
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context, true);
-                                Provider.of<CartProvider>(context,
-                                        listen: false)
-                                    .clearData();
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(
-                                    color: Colors.white24,
-                                    width: 1,
-                                  ),
-                                ),
-                                height: 50,
-                                width: 50,
-                                margin: EdgeInsets.only(left: 20),
-                                child: Icon(
-                                  Icons.arrow_back,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
+            return Column(
+              children: [
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context, true);
+                              Provider.of<CartProvider>(context, listen: false)
+                                  .clearData();
+                            },
                             child: Container(
-                              margin: EdgeInsets.only(right: 20),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 border: Border.all(
@@ -186,22 +165,44 @@ class _VendorMenuScreenState extends State<VendorMenuScreen> {
                               ),
                               height: 50,
                               width: 50,
+                              margin: EdgeInsets.only(left: 20),
                               child: Icon(
-                                Icons.menu,
+                                Icons.arrow_back,
                                 color: Colors.white,
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 35,
-                  ),
-                  Container(
+                        ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Container(
+                            margin: EdgeInsets.only(right: 20),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(
+                                color: Colors.white24,
+                                width: 1,
+                              ),
+                            ),
+                            height: 50,
+                            width: 50,
+                            child: Icon(
+                              Icons.menu,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 35,
+                ),
+                Expanded(
+                  child: Container(
                     width: double.maxFinite,
-                    height: height,
+                    height: double.maxFinite,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(30),
@@ -268,17 +269,17 @@ class _VendorMenuScreenState extends State<VendorMenuScreen> {
                           height: 20,
                         ),
                         Expanded(
-                          child: SingleChildScrollView(
-                            child: Container(
-                              width: double.maxFinite,
-                              height: height,
-                              decoration: BoxDecoration(
-                                color: Colors.grey.shade300,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20),
-                                ),
+                          child: Container(
+                            width: double.maxFinite,
+                            // height: height + height,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade300,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
                               ),
+                            ),
+                            child: SingleChildScrollView(
                               child: Column(
                                 children: [
                                   SizedBox(
@@ -343,7 +344,8 @@ class _VendorMenuScreenState extends State<VendorMenuScreen> {
                                     ),
                                   ),
                                   documents.isNotEmpty
-                                      ? Expanded(
+                                      ? SizedBox(
+                                          height: double.maxFinite,
                                           child: ListView.builder(
                                             physics:
                                                 NeverScrollableScrollPhysics(),
@@ -380,8 +382,8 @@ class _VendorMenuScreenState extends State<VendorMenuScreen> {
                       ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           },
         ),
@@ -396,7 +398,7 @@ class _VendorMenuScreenState extends State<VendorMenuScreen> {
             }
             print("$totalPrice-------->>price!!");
             return PriceButton(
-                label: "$totalPrice",
+                label: "₦$totalPrice",
                 onPressed: () async {
                   if (totalPrice != 0.0) {
                     await Navigator.push(
@@ -406,6 +408,7 @@ class _VendorMenuScreenState extends State<VendorMenuScreen> {
                           return ConfirmationPage(
                             number: widget.vendorNumber,
                             total: totalPrice,
+                            vendorName: widget.vendorName,
                           );
                         },
                       ),

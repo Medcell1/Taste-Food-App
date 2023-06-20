@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../Reusables/edit_menu_box.dart';
-import '../../Reusables/menu_tile.dart';
+import '../../Reusables/AdminUtils/edit_menu_box.dart';
+import '../../Reusables/AdminUtils/menu_tile.dart';
 import '../../model/menu_model.dart';
 
 class MenuSearchPage extends StatefulWidget {

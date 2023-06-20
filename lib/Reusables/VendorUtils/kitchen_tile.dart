@@ -56,7 +56,6 @@ class _KitchenTileState extends State<KitchenTile> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _loadQuantity();
   }
@@ -208,9 +207,6 @@ class _KitchenTileState extends State<KitchenTile> {
                       ),
                     ),
                   ),
-                  //
-                  // AddBox(
-                  //     height: widget.height * 0.1, width: widget.width * 0.05),
                 ],
               ),
             ),

@@ -6,18 +6,24 @@ class ReusableField extends StatelessWidget {
   final dynamic three;
   final dynamic validator;
   final dynamic onSaved;
+  final dynamic obscureText;
   final dynamic onTapped;
+  final dynamic inputType;
+  final dynamic prefixIcon;
   final controller;
-  const ReusableField(
-      {Key? key,
-      required this.one,
-      this.two,
-      this.three,
-      this.onSaved,
-      this.controller,
-      this.validator,
-      this.onTapped})
-      : super(key: key);
+  const ReusableField({
+    Key? key,
+    required this.one,
+    this.two,
+    this.three,
+    this.onSaved,
+    this.controller,
+    this.validator,
+    this.onTapped,
+    this.inputType,
+    this.prefixIcon,
+    this.obscureText,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +54,14 @@ class ReusableField extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20.0, right: 20.0),
             child: TextFormField(
+              obscureText: obscureText,
+              keyboardType: inputType,
               onTap: onTapped,
               controller: controller,
               onChanged: onSaved,
               validator: validator,
               decoration: InputDecoration(
+                prefixIcon: prefixIcon,
                 hintText: three,
                 filled: true,
                 fillColor: Colors.teal.withOpacity(0.3),
