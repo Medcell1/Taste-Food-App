@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:admin_taste/Screens/pages(customer)/menu_page.dart';
+import 'package:admin_taste/Screens/pages(customer)/settings_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -13,7 +15,9 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'kitchen_seearch_page.dart';
 
 class FirstPage extends StatefulWidget {
-  const FirstPage({Key? key}) : super(key: key);
+  final dynamic onChanged;
+  final dynamic value;
+  const FirstPage({Key? key, this.onChanged, this.value}) : super(key: key);
 
   @override
   State<FirstPage> createState() => _FirstPageState();
@@ -23,8 +27,10 @@ Stream<QuerySnapshot> refreshStream =
     FirebaseFirestore.instance.collection('users').snapshots();
 
 class _FirstPageState extends State<FirstPage> {
+  openBox() async{
+    await Hive.openBox('settings');
+  }
   checkInternet() async {
-    // Simple check to see if we have internet
     print("The statement 'this machine is connected to the Internet' is: ");
     print(await InternetConnectionCheckerPlus().hasConnection);
 
@@ -59,6 +65,7 @@ class _FirstPageState extends State<FirstPage> {
   @override
   void initState() {
     super.initState();
+    openBox();
     checkInternet();
   }
 
@@ -141,19 +148,26 @@ class _FirstPageState extends State<FirstPage> {
                       SizedBox(
                         width: width * 0.2,
                       ),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Colors.grey,
-                            width: 2,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            return SettingsPage();
+                          }));
+                        },
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: Colors.grey,
+                              width: 2,
+                            ),
                           ),
-                        ),
-                        child: Icon(
-                          CupertinoIcons.bell_solid,
-                          size: 20,
+                          child: Icon(
+                            CupertinoIcons.settings,
+                            size: 20,
+                          ),
                         ),
                       ),
                     ],

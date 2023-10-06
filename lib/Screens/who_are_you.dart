@@ -5,7 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../Reusables/nav_bar.dart';
 
 class UserProfilePage extends StatelessWidget {
-  const UserProfilePage({Key? key}) : super(key: key);
+  final dynamic onChanged;
+  final dynamic value;
+  const UserProfilePage({Key? key, this.onChanged, this.value}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class UserProfilePage extends StatelessWidget {
             onTap: () {
               Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => NavBar()),
+                  MaterialPageRoute(builder: (context) => NavBar(onChanged: onChanged, value: value,)),
                   (route) => false);
             },
             child: Center(

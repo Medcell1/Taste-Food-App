@@ -7,7 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class Splash extends StatefulWidget {
-  const Splash({Key? key}) : super(key: key);
+  final dynamic value;
+  final dynamic onChanged;
+  const Splash({Key? key, this.onChanged, this.value}) : super(key: key);
 
   @override
   State<Splash> createState() => _SplashState();
@@ -24,7 +26,7 @@ class _SplashState extends State<Splash> {
 
   changeScreen() {
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
-      return UserProfilePage();
+      return UserProfilePage(onChanged: widget.onChanged, value: widget.value,);
     }), (route) => false);
   }
 

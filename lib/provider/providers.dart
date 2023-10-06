@@ -274,3 +274,33 @@ class QuantityState extends ChangeNotifier {
     await prefs.setInt('quantity', _quantity);
   }
 }
+class ThemeProvider extends ChangeNotifier{
+
+  // // bool _isDarkMode = false;
+  // //
+  // // bool get isDarkMode => _isDarkMode;
+  // //
+  // //
+  // // void toggleTheme() {
+  // //   _isDarkMode = !_isDarkMode;
+  // //   _saveThemeMode(_isDarkMode);
+  // //   notifyListeners();
+  // // }
+  // //
+  // // Future<void> _saveThemeMode(bool isDarkMode) async {
+  // //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setBool('isDarkMode', isDarkMode);
+  // }
+  //
+  // Future<void> _loadThemeMode() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   _isDarkMode = prefs.getBool('isDarkMode') ?? false;
+  //   notifyListeners();
+  // }
+  //
+  // // Call this method in your main or wherever you initialize your app
+  // Future<void> init() async {
+  //   await _loadThemeMode();
+  // }
+
+}

@@ -202,9 +202,11 @@ class _EditMenuBoxState extends State<EditMenuBox> {
                         if (mp.editImageController.text.isNotEmpty &&
                             foodNameController.text.isNotEmpty &&
                             priceController.text.isNotEmpty) {
-                          setState(() {
-                            isLoading = true;
-                          });
+                          setState(
+                            () {
+                              isLoading = true;
+                            },
+                          );
                           await mp.updateMenuItem(
                             context,
                             DateTime.now(),

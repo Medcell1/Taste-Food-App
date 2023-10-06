@@ -6,7 +6,9 @@ import '../Screens/pages(customer)/FirstPage.dart';
 import '../Screens/pages(customer)/message_page.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({Key? key}) : super(key: key);
+  final dynamic onChanged;
+  final dynamic value;
+  const NavBar({Key? key, this.onChanged, this.value}) : super(key: key);
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -14,12 +16,14 @@ class NavBar extends StatefulWidget {
 
 class _NavBarState extends State<NavBar> {
   var currentIndex = 0;
-  final List<Widget> _pages = [
-    FirstPage(),
-    MessagePage(),
-  ];
+
   @override
+
   Widget build(BuildContext context) {
+    final List<Widget> _pages = [
+      FirstPage(onChanged: widget.onChanged, value: widget.value,),
+      MessagePage(),
+    ];
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       extendBody: true,
