@@ -1,16 +1,12 @@
 # admin_taste
 
-A new Flutter project.
+Flutter Food Ordering Platform.
 
-## Getting Started
+## ScreenShots
 
-This project is a starting point for a Flutter application.
+<img src="screenshots/who_are_you.png" width="200"/>     <img src="screenshots/admin_signup_page.png" width="200"/>
 
-A few resources to get you started if this is your first Flutter project:
+<img src="screenshots/admin_home_page.png" width="200"/>       <img src="screenshots/customer_home_page.png" width="200"/>   
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<img src="screenshots/customer_menu_page.png" width="200"/>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
