@@ -2,6 +2,7 @@ import 'package:admin_taste/Reusables/Reusablefield.dart';
 import 'package:admin_taste/Screens/pages(vendor_admin)/SignUpPage.dart';
 import 'package:admin_taste/services/authentication_service.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants.dart';
@@ -21,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   String password = '';
   bool isLoading = false;
   bool visibilitySecure2 = true;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -38,6 +40,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Color(0xff201A30),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -49,14 +52,15 @@ class _LoginPageState extends State<LoginPage> {
                 Image.asset(
                   'assets/logobig.png',
                   scale: 2.2,
-                  color: Colors.teal,
+                  color: Colors.white,
                 ),
                 SizedBox(
                   height: 30,
                 ),
                 Text(
                   'Sign In to CT_Taste',
-                  style: kLogpagetop.copyWith(fontSize: 30, color: Colors.teal),
+                  style:
+                      kLogpagetop.copyWith(fontSize: 30, color: Colors.white),
                 ),
                 SizedBox(
                   height: 20,
@@ -86,9 +90,9 @@ class _LoginPageState extends State<LoginPage> {
                         );
                       },
                       child: Text(
-                        'Create an Account',
+                        ' Create an Account',
                         style: kLogpagetop.copyWith(
-                            color: Color(0xFF83673D), fontSize: 20),
+                            color: Colors.grey.shade100, fontSize: 20),
                       ),
                     ),
                   ],
@@ -100,9 +104,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
             ReusableField(
               obscureText: false,
-              one: 'Email',
-              three: '',
-              two: '',
+              text: 'EMAIL',
+              prefixIcon: Icon(Icons.mail),
               onSaved: (value) {
                 email = value;
               },
@@ -122,9 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                     : Icon(Icons.visibility),
               ),
               inputType: TextInputType.visiblePassword,
-              one: 'Password',
-              three: '',
-              two: '',
+              text: 'PASSWORD',
               onSaved: (value) {
                 password = value;
               },
@@ -138,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
               child: TextButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
-                    Colors.teal,
+                    Color(0xff0DF5E3),
                   ),
                 ),
                 onPressed: () async {
@@ -170,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                     : Text(
                         'Log In',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 20,
                         ),
                       ),

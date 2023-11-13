@@ -2,12 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-
 import 'menu_page.dart';
 
 class KitchenSearchPage extends StatefulWidget {
   const KitchenSearchPage({Key? key}) : super(key: key);
-
   @override
   State<KitchenSearchPage> createState() => _KitchenSearchPageState();
 }

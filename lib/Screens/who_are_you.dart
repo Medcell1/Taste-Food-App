@@ -7,11 +7,15 @@ import '../Reusables/nav_bar.dart';
 class UserProfilePage extends StatelessWidget {
   final dynamic onChanged;
   final dynamic value;
-  const UserProfilePage({Key? key, this.onChanged, this.value}) : super(key: key);
+  final dynamic isDark;
+
+  const UserProfilePage({Key? key, this.onChanged, this.value, this.isDark})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: isDark ? Color(0xff303436) : Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -52,7 +56,13 @@ class UserProfilePage extends StatelessWidget {
             onTap: () {
               Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => NavBar(onChanged: onChanged, value: value,)),
+                  MaterialPageRoute(
+                    builder: (context) => NavBar(
+                      onChanged: onChanged,
+                      value: value,
+                      isDark: isDark,
+                    ),
+                  ),
                   (route) => false);
             },
             child: Center(

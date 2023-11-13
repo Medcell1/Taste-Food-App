@@ -20,7 +20,6 @@ class _MenuSearchPageState extends State<MenuSearchPage> {
   final user = FirebaseAuth.instance.currentUser;
   TextEditingController searchContoller = TextEditingController();
 
-  List<MenuModel> _searchResults = [];
   String searchQuery = "";
   @override
   void initState() {

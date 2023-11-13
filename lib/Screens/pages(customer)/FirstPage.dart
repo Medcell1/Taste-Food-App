@@ -17,7 +17,8 @@ import 'kitchen_seearch_page.dart';
 class FirstPage extends StatefulWidget {
   final dynamic onChanged;
   final dynamic value;
-  const FirstPage({Key? key, this.onChanged, this.value}) : super(key: key);
+  final dynamic isDark;
+  const FirstPage({Key? key, this.onChanged, this.value, this.isDark}) : super(key: key);
 
   @override
   State<FirstPage> createState() => _FirstPageState();
@@ -81,6 +82,7 @@ class _FirstPageState extends State<FirstPage> {
     }
 
     return Scaffold(
+      backgroundColor: widget.isDark ? Color(0xff303436) : Colors.white,
       body: LiquidPullToRefresh(
         backgroundColor: Colors.black,
         showChildOpacityTransition: false,
@@ -123,8 +125,8 @@ class _FirstPageState extends State<FirstPage> {
                         },
                         child: Container(
                           margin: EdgeInsets.only(left: width * 0.05),
-                          height: 40,
-                          width: 40,
+                          height: 50,
+                          width: 50,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(width: 2, color: Colors.grey),
@@ -132,6 +134,7 @@ class _FirstPageState extends State<FirstPage> {
                           child: Icon(
                             CupertinoIcons.search,
                             size: 20,
+                            color: widget.isDark?Colors.white: Colors.black,
                           ),
                         ),
                       ),
@@ -143,7 +146,7 @@ class _FirstPageState extends State<FirstPage> {
                           'assets/logobig.png',
                         ),
                         height: 30,
-                        color: Colors.green,
+                        color: widget.isDark?Colors.white: Colors.green,
                       ),
                       SizedBox(
                         width: width * 0.2,
@@ -155,8 +158,9 @@ class _FirstPageState extends State<FirstPage> {
                           }));
                         },
                         child: Container(
-                          height: 40,
-                          width: 40,
+                          margin: EdgeInsets.only(right: 12),
+                          height: 50,
+                          width: 50,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(
@@ -167,6 +171,7 @@ class _FirstPageState extends State<FirstPage> {
                           child: Icon(
                             CupertinoIcons.settings,
                             size: 20,
+                            color: widget.isDark?Colors.white: Colors.black,
                           ),
                         ),
                       ),
@@ -257,6 +262,7 @@ class _FirstPageState extends State<FirstPage> {
                           textStyle: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 21,
+                            color: widget.isDark?Colors.white: Colors.black,
                           ),
                         ),
                       ),

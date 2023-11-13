@@ -10,18 +10,20 @@ class UtilContainer extends StatelessWidget {
   final String name;
   final String number;
   final dynamic content;
-  const UtilContainer(
-      {Key? key,
-      this.height,
-      this.content,
-      this.width,
-      required this.name,
-      required this.number})
-      : super(key: key);
+
+  const UtilContainer({
+    Key? key,
+    this.height,
+    this.content,
+    this.width,
+    required this.name,
+    required this.number,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     AuthProvider ap = Provider.of(context, listen: false);
+
     return Stack(
       children: [
         Container(
@@ -72,8 +74,9 @@ class UtilContainer extends StatelessWidget {
                   ),
                   Text(
                     name,
-                    style:
-                        GoogleFonts.kanit(textStyle: TextStyle(fontSize: 20)),
+                    style: GoogleFonts.kanit(
+                        textStyle:
+                            TextStyle(fontSize: 20, color: Colors.black)),
                   ),
                 ],
               ),
@@ -101,9 +104,12 @@ class UtilContainer extends StatelessWidget {
                   SizedBox(
                     width: width * 0.2,
                   ),
-                  Text('Info@ct.com',
-                      style: GoogleFonts.kanit(
-                          textStyle: TextStyle(fontSize: 20))),
+                  Text(
+                    'Info@ct.com',
+                    style: GoogleFonts.kanit(
+                      textStyle: TextStyle(fontSize: 20, color: Colors.black),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -130,9 +136,12 @@ class UtilContainer extends StatelessWidget {
                   SizedBox(
                     width: width * 0.2,
                   ),
-                  Text(number,
-                      style: GoogleFonts.kanit(
-                          textStyle: TextStyle(fontSize: 20))),
+                  Text(
+                    number,
+                    style: GoogleFonts.kanit(
+                      textStyle: TextStyle(fontSize: 20, color: Colors.black),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -161,9 +170,12 @@ class UtilContainer extends StatelessWidget {
                   SizedBox(
                     width: width * 0.2,
                   ),
-                  Text('Instagram Account',
-                      style: GoogleFonts.kanit(
-                          textStyle: TextStyle(fontSize: 20))),
+                  Text(
+                    'Instagram Account',
+                    style: GoogleFonts.kanit(
+                      textStyle: TextStyle(fontSize: 20, color: Colors.black),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -197,7 +209,9 @@ class UtilContainer extends StatelessWidget {
                     Text(
                       'Log Out',
                       style: GoogleFonts.kanit(
-                        textStyle: TextStyle(fontSize: 20),
+                        textStyle: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black),
                       ),
                     ),
                   ],

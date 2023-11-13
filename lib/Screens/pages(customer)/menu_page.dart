@@ -214,7 +214,7 @@ class _VendorMenuScreenState extends State<VendorMenuScreen> {
                             topRight: Radius.circular(30),
                             topLeft: Radius.circular(30),
                           ),
-                          color: isDark? Color(0xff212121) : Colors.white,
+                          color:  Colors.white,
                         ),
                         child: Column(
                           children: [
@@ -281,7 +281,7 @@ class _VendorMenuScreenState extends State<VendorMenuScreen> {
                                   width: double.maxFinite,
                                   // height: height + height,
                                   decoration: BoxDecoration(
-                                    color: isDark ? Color(0xff212121) : Colors.grey.shade300,
+                                    color:  Colors.grey.shade300,
                                     borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(20),
                                       topRight: Radius.circular(20),
@@ -367,7 +367,6 @@ class _VendorMenuScreenState extends State<VendorMenuScreen> {
                                                 width: width,
                                                 height: height,
                                                 index: index,
-                                                isDark: isDark,
                                               );
                                             },
                                           ),

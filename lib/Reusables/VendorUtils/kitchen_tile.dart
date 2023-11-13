@@ -73,7 +73,7 @@ class _KitchenTileState extends State<KitchenTile> {
               child: Container(
                 height: 90,
                 decoration: BoxDecoration(
-                  color: widget.isDark? Color(0xff212121) : Colors.white,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.white)
                   // border: widget.isDark ? Border.all(
@@ -113,7 +113,7 @@ class _KitchenTileState extends State<KitchenTile> {
                             textStyle: TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 20,
-                              color: widget.isDark? Colors.white : Colors.black,
+                              color:  Colors.black,
                             ),
                           ),
                         ),

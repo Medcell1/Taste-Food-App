@@ -13,7 +13,7 @@ class BigUtilBox extends StatelessWidget {
       required this.text,
       this.onTap,
       this.height,
-      this.width})
+      this.width,})
       : super(key: key);
 
   @override
@@ -55,6 +55,7 @@ class BigUtilBox extends StatelessWidget {
               text,
               style: GoogleFonts.kanit(
                 fontSize: 20,
+                color: Colors.black,
               ),
             )
           ],

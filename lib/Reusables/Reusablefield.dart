@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ReusableField extends StatelessWidget {
-  final dynamic one;
-  final dynamic two;
-  final dynamic three;
+
+
+  final dynamic text;
   final dynamic validator;
   final dynamic onSaved;
   final dynamic obscureText;
@@ -13,9 +13,8 @@ class ReusableField extends StatelessWidget {
   final controller;
   const ReusableField({
     Key? key,
-    required this.one,
-    this.two,
-    this.three,
+
+    this.text,
     this.onSaved,
     this.controller,
     this.validator,
@@ -31,29 +30,11 @@ class ReusableField extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 18.0),
-            child: Row(
-              children: [
-                Text(
-                  one,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  two,
-                  style: TextStyle(color: Colors.red),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+            padding: EdgeInsets.only(left: 15, right: 15),
             child: TextFormField(
+              style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold, fontSize: 20),
+              cursorHeight: 18,
+              cursorColor: Colors.white,
               obscureText: obscureText,
               keyboardType: inputType,
               onTap: onTapped,
@@ -61,17 +42,25 @@ class ReusableField extends StatelessWidget {
               onChanged: onSaved,
               validator: validator,
               decoration: InputDecoration(
+
+                labelStyle: TextStyle(
+                  color: Colors.grey.shade300,
+                  fontSize: 18,
+                  height: 4,
+                ),
                 prefixIcon: prefixIcon,
-                hintText: three,
-                filled: true,
-                fillColor: Colors.teal.withOpacity(0.3),
+                labelText: text,
+                prefixIconColor: Colors.white,
+
+                fillColor: Color(0xff38304D),
                 border: OutlineInputBorder(
                   borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
             ),
           ),
+
         ],
       ),
     );

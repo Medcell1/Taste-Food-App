@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SmallUtilBox extends StatelessWidget {
+  final dynamic isDark;
   final String assetUrl;
   final String text;
   final dynamic onTap;
@@ -17,7 +18,7 @@ class SmallUtilBox extends StatelessWidget {
     this.containerColor,
     this.textColor,
     this.height,
-    this.width,
+    this.width, this.isDark,
   }) : super(key: key);
 
   @override

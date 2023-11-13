@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
             builder: (context, box,child) {
               final isDark = box.get('isDark' , defaultValue: false);
               return MaterialApp(
-                theme: isDark ? ThemeData.dark() : ThemeData.light(),
+
                 // themeMode: darkMode?ThemeMode.dark : ThemeMode.light,
                 // darkTheme: ThemeData.dark(),
                 debugShowCheckedModeBanner: false,
@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
                         ),
                       );
                     }
-                    return Splash();
+                    return Splash(isDark: isDark,);
                   },
                 ),
               );

@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 class SettingsPage extends StatefulWidget {
   final dynamic onchanged;
   final dynamic value;
+
   const SettingsPage({super.key, this.onchanged, this.value});
 
   @override
@@ -17,68 +18,82 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return ValueListenableBuilder(
       valueListenable: Hive.box('settings').listenable(),
-      builder: ( context, box,child) {
-        final isDark = box.get('isDark' , defaultValue: false);
+      builder: (context, box, child) {
+        final isDark = box.get('isDark', defaultValue: false);
         return Scaffold(
-          backgroundColor: isDark ? Color(0xff212121) : Colors.white,
-          appBar: AppBar(
-            centerTitle: true,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-              ),
-            ),
             backgroundColor: isDark ? Color(0xff212121) : Colors.white,
-            title: isDark ? Text(
-              'Settings',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white,
-              ),
-            ) : Text('Settings', style: TextStyle(fontSize: 20 , color: Colors.black),)
-          ),
-          body: Column(
-                children: [
-                  SizedBox(
-                    height: 10,
+            appBar: AppBar(
+                centerTitle: true,
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: isDark ? Colors.white : Colors.black,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
-                    child: SizedBox(
-                      height: height / 10,
-                      child: Card(
-                        color: isDark ? Color(0xff212121) : Colors.white,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            isDark ? Container(
-                              margin: EdgeInsets.only(left: 20),
-                              child: Text('Switch to LightMode'),) : Container(
-                              margin: EdgeInsets.only(left: 20),
-                              child: Text('Switch to DarkMode'),),
-                            CupertinoSwitch(
-                                value: isDark,
-                                onChanged: (val) {
-                                  box.put('isDark', val);
-                                },)
-                          ],
+                ),
+                backgroundColor: isDark ? Color(0xff212121) : Colors.white,
+                title: isDark
+                    ? Text(
+                        'Settings',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
                         ),
+                      )
+                    : Text(
+                        'Settings',
+                        style: TextStyle(fontSize: 20, color: Colors.black),
+                      )),
+            body: Column(
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 5.0, vertical: 5.0),
+                  child: SizedBox(
+                    height: height / 10,
+                    child: Card(
+                      color: isDark ? Color(0xff212121) : Colors.white,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          isDark
+                              ? Container(
+                                  margin: EdgeInsets.only(left: 20),
+                                  child: Text(
+                                    'Switch to LightMode',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                )
+                              : Container(
+                                  margin: EdgeInsets.only(left: 20),
+                                  child: Text(
+                                    'Switch to DarkMode',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                          CupertinoSwitch(
+                            value: isDark,
+                            onChanged: (val) {
+                              box.put('isDark', val);
+                            },
+                          )
+                        ],
                       ),
                     ),
                   ),
-                ],
-          ));
+                ),
+              ],
+            ));
       },
-
     );
   }
 }
