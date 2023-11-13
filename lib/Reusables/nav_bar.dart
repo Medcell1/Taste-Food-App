@@ -8,8 +8,8 @@ import '../Screens/pages(customer)/message_page.dart';
 class NavBar extends StatefulWidget {
   final dynamic onChanged;
   final dynamic value;
-  final dynamic isDark;
-  const NavBar({Key? key, this.onChanged, this.value, this.isDark}) : super(key: key);
+
+  const NavBar({Key? key, this.onChanged, this.value,}) : super(key: key);
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -22,7 +22,7 @@ class _NavBarState extends State<NavBar> {
 
   Widget build(BuildContext context) {
     final List<Widget> _pages = [
-      FirstPage(onChanged: widget.onChanged, value: widget.value, isDark: widget.isDark,),
+      FirstPage(onChanged: widget.onChanged, value: widget.value),
       MessagePage(),
     ];
     var width = MediaQuery.of(context).size.width;

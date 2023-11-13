@@ -35,7 +35,6 @@ class _SplashState extends State<Splash> {
       return UserProfilePage(
         onChanged: widget.onChanged,
         value: widget.value,
-        isDark: widget.isDark,
       );
     }), (route) => false);
   }
@@ -43,7 +42,6 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     startTimeOut();
-    // TODO: implement initState
     super.initState();
   }
 
