@@ -51,7 +51,7 @@ class ReusableField extends StatelessWidget {
                 prefixIcon: prefixIcon,
                 labelText: text,
                 prefixIconColor: Colors.white,
-
+                filled: true,
                 fillColor: Color(0xff38304D),
                 border: OutlineInputBorder(
                   borderSide: BorderSide.none,

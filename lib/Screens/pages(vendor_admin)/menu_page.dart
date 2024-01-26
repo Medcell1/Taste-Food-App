@@ -71,6 +71,7 @@ class _MenuPageState extends State<MenuPage> {
         isEqualTo: user!.uid,
       )
       .snapshots();
+
   Future<void> handleRefresh() async {
     setState(() {
       refreshStream = FirebaseFirestore.instance
@@ -95,183 +96,181 @@ class _MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
-        return Container(
-          decoration: BoxDecoration(
-            
-            gradient: LinearGradient(
-              colors: [Colors.white, Colors.green],
-              stops: [0.2, 1],
-              begin: Alignment.bottomLeft,
-              end: Alignment.topRight,
-            ),
-          ),
-          child: Scaffold(
-            key: scaffoldKey,
-            backgroundColor: Colors.transparent,
-            body: LiquidPullToRefresh(
-              color: Colors.teal,
-              showChildOpacityTransition: false,
-              onRefresh: handleRefresh,
-              child: SingleChildScrollView(
-                child: Consumer<MenuProvider>(
-                  builder: (context, mp, child) {
-                    return StreamBuilder<QuerySnapshot>(
-                      stream: refreshStream,
-                      builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (!snapshot.hasData) {
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: height * 0.9,
-                                child: Center(
-                                  child: LoadingAnimationWidget.dotsTriangle(
-                                    size: 50,
-                                    color: Colors.white,
-                                  ),
-                                ),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.white, Colors.green],
+          stops: [0.2, 1],
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+        ),
+      ),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: Colors.transparent,
+        body: LiquidPullToRefresh(
+          color: Colors.teal,
+          showChildOpacityTransition: false,
+          onRefresh: handleRefresh,
+          child: SingleChildScrollView(
+            child: Consumer<MenuProvider>(
+              builder: (context, mp, child) {
+                return StreamBuilder<QuerySnapshot>(
+                  stream: refreshStream,
+                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (!snapshot.hasData) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: height * 0.9,
+                            child: Center(
+                              child: LoadingAnimationWidget.dotsTriangle(
+                                size: 50,
+                                color: Colors.white,
                               ),
-                            ],
-                          );
-                        } else if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: height * 0.9,
-                                child: Center(
-                                  child: LoadingAnimationWidget.dotsTriangle(
-                                    size: 50,
-                                    color: Colors.black,
-                                  ),
-                                ),
+                            ),
+                          ),
+                        ],
+                      );
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: height * 0.9,
+                            child: Center(
+                              child: LoadingAnimationWidget.dotsTriangle(
+                                size: 50,
+                                color: Colors.black,
                               ),
-                            ],
-                          );
-                        }
-                        final docs = snapshot.data!.docs;
-                        final menuItems = docs
-                            .map((doc) => MenuModel.fromMap(
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                    final docs = snapshot.data!.docs;
+                    final menuItems = docs
+                        .map((doc) => MenuModel.fromMap(
                             doc.data() as Map<String, dynamic>))
-                            .toList();
+                        .toList();
 
-                        return Column(
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: 50,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(
-                              height: 50,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Container(
-                                    margin: EdgeInsets.only(left: 30),
-                                    child: Text(
-                                      'Menu',
-                                      style: GoogleFonts.ubuntu(
-                                          fontSize: 32,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Container(
+                                margin: EdgeInsets.only(left: 30),
+                                child: Text(
+                                  'Menu',
+                                  style: GoogleFonts.ubuntu(
+                                      fontSize: 32,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                                IconButton(
-                                  onPressed: () async {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return MenuSearchPage();
-                                        },
-                                      ),
-                                    );
-                                  },
-                                  icon: Icon(
-                                    Icons.search_rounded,
-                                    size: 30,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                            ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: menuItems.length,
-                              shrinkWrap: true,
-                              itemBuilder: (BuildContext context, int index) {
-                                // menuItems
-                                //     .sort((b, a) => b.dateTime!.compareTo(a.dateTime!));
-                                return MenuTile(
-                                  onTap: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return EditMenuBox(
-                                              menuId:
-                                              snapshot.data!.docs[index].id);
-                                        });
-                                  },
-                                  onLongTap: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            title: const Text(
-                                                'Are you sure you want to delete?'),
-                                            actionsAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () async {
-                                                  await snapshot
-                                                      .data!.docs[index].reference
-                                                      .delete();
-                                                  Navigator.pop(context, true);
-                                                },
-                                                child: const Text('Yes'),
-                                              ),
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context, false);
-                                                },
-                                                child: const Text('No'),
-                                              ),
-                                            ],
-                                          );
-                                        });
-                                  },
-                                  imageUrl: menuItems[index].foodImage!,
-                                  one: menuItems[index].foodName!,
-                                  two: menuItems[index].price!,
+                            IconButton(
+                              onPressed: () async {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return MenuSearchPage();
+                                    },
+                                  ),
                                 );
                               },
+                              icon: Icon(
+                                Icons.search_rounded,
+                                size: 30,
+                                color: Colors.black,
+                              ),
                             ),
                           ],
-                        );
-                      },
+                        ),
+                        ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: menuItems.length,
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, int index) {
+                            // menuItems
+                            //     .sort((b, a) => b.dateTime!.compareTo(a.dateTime!));
+                            return MenuTile(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return EditMenuBox(
+                                          menuId:
+                                              snapshot.data!.docs[index].id);
+                                    });
+                              },
+                              onLongTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: const Text(
+                                            'Are you sure you want to delete?'),
+                                        actionsAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () async {
+                                              await snapshot
+                                                  .data!.docs[index].reference
+                                                  .delete();
+                                              Navigator.pop(context, true);
+                                            },
+                                            child: const Text('Yes'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context, false);
+                                            },
+                                            child: const Text('No'),
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              },
+                              imageUrl: menuItems[index].foodImage!,
+                              one: menuItems[index].foodName!,
+                              two: menuItems[index].price!,
+                            );
+                          },
+                        ),
+                      ],
                     );
                   },
-                ),
-              ),
-            ),
-            floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.black,
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AddMenuBox();
-                    });
+                );
               },
             ),
           ),
-        );
-
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.black,
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AddMenuBox();
+                });
+          },
+        ),
+      ),
+    );
   }
 }

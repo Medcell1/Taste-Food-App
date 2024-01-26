@@ -18,6 +18,7 @@ import 'kitchen_seearch_page.dart';
 class FirstPage extends StatefulWidget {
   final dynamic onChanged;
   final dynamic value;
+
   const FirstPage({Key? key, this.onChanged, this.value}) : super(key: key);
 
   @override
@@ -28,9 +29,10 @@ Stream<QuerySnapshot> refreshStream =
     FirebaseFirestore.instance.collection('users').snapshots();
 
 class _FirstPageState extends State<FirstPage> {
-  openBox() async{
+  openBox() async {
     await Hive.openBox('settings');
   }
+
   checkInternet() async {
     print("The statement 'this machine is connected to the Internet' is: ");
     print(await InternetConnectionCheckerPlus().hasConnection);
@@ -83,7 +85,7 @@ class _FirstPageState extends State<FirstPage> {
 
     return ValueListenableBuilder(
       valueListenable: Hive.box("settings").listenable(),
-      builder: ( context, box,  child) {
+      builder: (context, box, child) {
         var isDark = box.get("isDark", defaultValue: false);
         return Scaffold(
           backgroundColor: isDark ? Color(0xff303436) : Colors.white,
@@ -133,12 +135,13 @@ class _FirstPageState extends State<FirstPage> {
                               width: 50,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                border: Border.all(width: 2, color: Colors.grey),
+                                border:
+                                    Border.all(width: 2, color: Colors.grey),
                               ),
                               child: Icon(
                                 CupertinoIcons.search,
                                 size: 20,
-                                color: isDark?Colors.white: Colors.black,
+                                color: isDark ? Colors.white : Colors.black,
                               ),
                             ),
                           ),
@@ -150,14 +153,15 @@ class _FirstPageState extends State<FirstPage> {
                               'assets/logobig.png',
                             ),
                             height: 30,
-                            color: isDark?Colors.white: Colors.green,
+                            color: isDark ? Colors.white : Colors.green,
                           ),
                           SizedBox(
                             width: width * 0.2,
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
                                 return SettingsPage();
                               }));
                             },
@@ -175,7 +179,7 @@ class _FirstPageState extends State<FirstPage> {
                               child: Icon(
                                 CupertinoIcons.settings,
                                 size: 20,
-                                color: isDark?Colors.white: Colors.black,
+                                color: isDark ? Colors.white : Colors.black,
                               ),
                             ),
                           ),
@@ -266,7 +270,7 @@ class _FirstPageState extends State<FirstPage> {
                               textStyle: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 21,
-                                color: isDark?Colors.white: Colors.black,
+                                color: isDark ? Colors.white : Colors.black,
                               ),
                             ),
                           ),
@@ -276,8 +280,9 @@ class _FirstPageState extends State<FirstPage> {
                         child: GridView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2),
                           itemCount: documents.length,
                           padding: EdgeInsets.all(2.0),
                           itemBuilder: (BuildContext context, int index) {
@@ -289,19 +294,20 @@ class _FirstPageState extends State<FirstPage> {
                                 child: FadeInAnimation(
                                   child: GestureDetector(
                                     onTap: () {
-                                      if (snapshot.data?.docs[index].id != null ||
+                                      if (snapshot.data?.docs[index].id !=
+                                              null ||
                                           documents[index]['name'] != null) {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) {
                                               return VendorMenuScreen(
-                                                vendorId:
-                                                snapshot.data!.docs[index].id,
+                                                vendorId: snapshot
+                                                    .data!.docs[index].id,
                                                 vendorName: documents[index]
-                                                ['name'],
+                                                    ['name'],
                                                 vendorNumber: documents[index]
-                                                ['phone_number'],
+                                                    ['phone_number'],
                                               );
                                             },
                                           ),
@@ -317,7 +323,8 @@ class _FirstPageState extends State<FirstPage> {
                                         decoration: BoxDecoration(
                                           shape: BoxShape.rectangle,
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(15.0)),
+                                            Radius.circular(15.0),
+                                          ),
                                           image: DecorationImage(
                                             image: NetworkImage(
                                               documents[index]['profile_pic'] ??
@@ -349,15 +356,17 @@ class _FirstPageState extends State<FirstPage> {
                                               padding: EdgeInsets.all(10),
                                               child: Column(
                                                 crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                                    CrossAxisAlignment.start,
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.end,
+                                                    MainAxisAlignment.end,
                                                 children: [
                                                   Text(
-                                                    documents[index]['name'] ?? '',
+                                                    documents[index]['name'] ??
+                                                        '',
                                                     style: TextStyle(
                                                       fontSize: 20,
-                                                      fontWeight: FontWeight.w500,
+                                                      fontWeight:
+                                                          FontWeight.w500,
                                                       color: Colors.white,
                                                     ),
                                                   ),
@@ -386,7 +395,6 @@ class _FirstPageState extends State<FirstPage> {
           ),
         );
       },
-
     );
   }
 }

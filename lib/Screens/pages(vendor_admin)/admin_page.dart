@@ -31,7 +31,7 @@ class AdminPage extends StatefulWidget {
 
 class _AdminPageState extends State<AdminPage> {
   checkInternet() async {
-    print("The statement 'this machine is connected to the Internet' is: ");
+    print("The statement 'this Application is connected to the Internet' is: ");
     print(await InternetConnectionCheckerPlus().hasConnection);
 
     print(

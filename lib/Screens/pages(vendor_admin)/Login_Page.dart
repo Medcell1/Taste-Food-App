@@ -39,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Color(0xff201A30),
       body: SingleChildScrollView(
@@ -104,6 +105,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             ReusableField(
               obscureText: false,
+
               text: 'EMAIL',
               prefixIcon: Icon(Icons.mail),
               onSaved: (value) {
@@ -131,50 +133,55 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             SizedBox(
-              height: 50,
+              height: height*0.2,
+              width: width *0.2,
             ),
-            SizedBox(
-              height: 60,
-              width: 200,
-              child: TextButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    Color(0xff0DF5E3),
-                  ),
+            GestureDetector(
+              onTap:  () async{
+                setState(() {
+                  isLoading = true;
+                });
+                String res =
+                    await AuthServices().logInUser(email, password, context);
+                await Provider.of<MenuProvider>(context, listen: false)
+                    .getUserInfo();
+                if (res == 'Successful') {
+                  snackBar!.showSnackBar(
+                    SnackBar(
+                      content: Text('Login Successful'),
+                    ),
+                  );
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => AdminPage()),
+                          (route) => false);
+                  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                }
+                setState(() {
+                  isLoading = false;
+                });
+
+
+              },
+              child: Container(
+                height: height*0.07,
+                width: width * 0.5,
+                decoration: BoxDecoration(
+                  color:  Colors.teal,
+                  borderRadius: BorderRadius.circular(40),
+
                 ),
-                onPressed: () async {
-                  setState(() {
-                    isLoading = true;
-                  });
-                  String res =
-                      await AuthServices().logInUser(email, password, context);
-                  await Provider.of<MenuProvider>(context, listen: false)
-                      .getUserInfo();
-                  if (res == 'Successful') {
-                    snackBar!.showSnackBar(
-                      SnackBar(
-                        content: Text('Login Successful'),
-                      ),
-                    );
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => AdminPage()),
-                        (route) => false);
-                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                  }
-                  setState(() {
-                    isLoading = false;
-                  });
-                },
                 child: isLoading
-                    ? CircularProgressIndicator()
-                    : Text(
-                        'Log In',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
+                    ? Center(child: CircularProgressIndicator())
+                    : Center(
+                      child: Text(
+                          'Log In',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
+                    ),
               ),
             )
           ],

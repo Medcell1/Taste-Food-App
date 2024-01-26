@@ -70,14 +70,14 @@ class _SettingsPageState extends State<SettingsPage> {
                                   margin: EdgeInsets.only(left: 20),
                                   child: Text(
                                     'Switch to LightMode',
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: Colors.white, fontSize: 19),
                                   ),
                                 )
                               : Container(
                                   margin: EdgeInsets.only(left: 20),
                                   child: Text(
                                     'Switch to DarkMode',
-                                    style: TextStyle(color: Colors.black),
+                                    style: TextStyle(color: Colors.black , fontSize: 19),
                                   ),
                                 ),
                           CupertinoSwitch(

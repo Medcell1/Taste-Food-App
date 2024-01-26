@@ -6,8 +6,6 @@ import 'package:provider/provider.dart';
 
 class AuthServices {
   Database db = Database();
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-
   ///  sign up function .....
   Future signUpUser(
     String name,
@@ -26,14 +24,6 @@ class AuthServices {
       await db.savingUserData(
           name, email, number, image, userCredential.user!.uid);
 
-      // User user = (await firebaseAuth.createUserWithEmailAndPassword(
-      //         email: email, password: password))
-      //     .user!;
-      // if (user != null) {
-      //   /// calling database services to update the user data...
-      //   await Database(uid: user.uid).savingUserData(name, email);
-      //   return true;
-      // }
 
     } on FirebaseException catch (e) {
       print(e);
@@ -71,7 +61,6 @@ class AuthServices {
     String res = 'Some error';
     try {
       if (email.isNotEmpty || password.isNotEmpty) {
-        MenuProvider mp = Provider.of(context, listen: false);
         await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: email, password: password);
         res = 'Successful';

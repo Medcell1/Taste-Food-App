@@ -34,9 +34,6 @@ class Database {
         .get();
   }
 
-  getUserMenu() {
-    return userCollection.doc(uid).snapshots();
-  }
 
   Future savingMenu(
     String foodName,
