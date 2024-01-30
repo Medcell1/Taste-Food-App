@@ -1,6 +1,6 @@
 # admin_taste
 
-Flutter Food Ordering Platform.
+Flutter E-commerce Food Ordering Platform.
 
 ## ScreenShots
 
